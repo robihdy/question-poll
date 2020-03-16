@@ -1,13 +1,10 @@
 type Query {
   info: String!
   questions: [Question!]!
-  question(id: ID!): Question
 }
 
 type Mutation {
   ask(description: String!): Question!
-  updateQuestion(id: ID!, description: String): Question
-  deleteQuestion(id: ID!): Question
 }
 
 type Question {
