@@ -1,0 +1,6 @@
+type Question {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  description: String!
+  votes: Int!
+}
