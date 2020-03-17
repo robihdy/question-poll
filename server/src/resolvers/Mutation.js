@@ -32,13 +32,19 @@ const login = async (parent, args, context, info) => {
   };
 };
 
-const post = (parent, args, context, info) => {
+const post = async (parent, args, context, info) => {
   const organizerId = getOrganizerId(context);
-  return context.prisma.createEvent({
+  const count = await context.prisma
+    .eventsConnection()
+    .aggregate()
+    .count();
+
+  const event = await context.prisma.createEvent({
     name: args.name,
-    code: args.code,
+    code: `QP-${count}`,
     postedBy: { connect: { id: organizerId } }
   });
+  return event;
 };
 
 const ask = (parent, args, context) => {
