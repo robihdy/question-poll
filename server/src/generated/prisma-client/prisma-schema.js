@@ -3,7 +3,15 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateQuestion {
+/* GraphQL */ `type AggregateEvent {
+  count: Int!
+}
+
+type AggregateOrganizer {
+  count: Int!
+}
+
+type AggregateQuestion {
   count: Int!
 }
 
@@ -13,9 +21,261 @@ type BatchPayload {
 
 scalar DateTime
 
+type Event {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  code: String!
+  postedBy: Organizer
+}
+
+type EventConnection {
+  pageInfo: PageInfo!
+  edges: [EventEdge]!
+  aggregate: AggregateEvent!
+}
+
+input EventCreateInput {
+  id: ID
+  name: String!
+  code: String!
+  postedBy: OrganizerCreateOneWithoutEventsInput
+}
+
+input EventCreateManyWithoutPostedByInput {
+  create: [EventCreateWithoutPostedByInput!]
+  connect: [EventWhereUniqueInput!]
+}
+
+input EventCreateWithoutPostedByInput {
+  id: ID
+  name: String!
+  code: String!
+}
+
+type EventEdge {
+  node: Event!
+  cursor: String!
+}
+
+enum EventOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  name_ASC
+  name_DESC
+  code_ASC
+  code_DESC
+}
+
+type EventPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  code: String!
+}
+
+input EventScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  AND: [EventScalarWhereInput!]
+  OR: [EventScalarWhereInput!]
+  NOT: [EventScalarWhereInput!]
+}
+
+type EventSubscriptionPayload {
+  mutation: MutationType!
+  node: Event
+  updatedFields: [String!]
+  previousValues: EventPreviousValues
+}
+
+input EventSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EventWhereInput
+  AND: [EventSubscriptionWhereInput!]
+  OR: [EventSubscriptionWhereInput!]
+  NOT: [EventSubscriptionWhereInput!]
+}
+
+input EventUpdateInput {
+  name: String
+  code: String
+  postedBy: OrganizerUpdateOneWithoutEventsInput
+}
+
+input EventUpdateManyDataInput {
+  name: String
+  code: String
+}
+
+input EventUpdateManyMutationInput {
+  name: String
+  code: String
+}
+
+input EventUpdateManyWithoutPostedByInput {
+  create: [EventCreateWithoutPostedByInput!]
+  delete: [EventWhereUniqueInput!]
+  connect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  disconnect: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [EventScalarWhereInput!]
+  updateMany: [EventUpdateManyWithWhereNestedInput!]
+}
+
+input EventUpdateManyWithWhereNestedInput {
+  where: EventScalarWhereInput!
+  data: EventUpdateManyDataInput!
+}
+
+input EventUpdateWithoutPostedByDataInput {
+  name: String
+  code: String
+}
+
+input EventUpdateWithWhereUniqueWithoutPostedByInput {
+  where: EventWhereUniqueInput!
+  data: EventUpdateWithoutPostedByDataInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutPostedByInput {
+  where: EventWhereUniqueInput!
+  update: EventUpdateWithoutPostedByDataInput!
+  create: EventCreateWithoutPostedByInput!
+}
+
+input EventWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  postedBy: OrganizerWhereInput
+  AND: [EventWhereInput!]
+  OR: [EventWhereInput!]
+  NOT: [EventWhereInput!]
+}
+
+input EventWhereUniqueInput {
+  id: ID
+  code: String
+}
+
 scalar Long
 
 type Mutation {
+  createEvent(data: EventCreateInput!): Event!
+  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
+  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteManyEvents(where: EventWhereInput): BatchPayload!
+  createOrganizer(data: OrganizerCreateInput!): Organizer!
+  updateOrganizer(data: OrganizerUpdateInput!, where: OrganizerWhereUniqueInput!): Organizer
+  updateManyOrganizers(data: OrganizerUpdateManyMutationInput!, where: OrganizerWhereInput): BatchPayload!
+  upsertOrganizer(where: OrganizerWhereUniqueInput!, create: OrganizerCreateInput!, update: OrganizerUpdateInput!): Organizer!
+  deleteOrganizer(where: OrganizerWhereUniqueInput!): Organizer
+  deleteManyOrganizers(where: OrganizerWhereInput): BatchPayload!
   createQuestion(data: QuestionCreateInput!): Question!
   updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
   updateManyQuestions(data: QuestionUpdateManyMutationInput!, where: QuestionWhereInput): BatchPayload!
@@ -34,6 +294,184 @@ interface Node {
   id: ID!
 }
 
+type Organizer {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
+}
+
+type OrganizerConnection {
+  pageInfo: PageInfo!
+  edges: [OrganizerEdge]!
+  aggregate: AggregateOrganizer!
+}
+
+input OrganizerCreateInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  events: EventCreateManyWithoutPostedByInput
+}
+
+input OrganizerCreateOneWithoutEventsInput {
+  create: OrganizerCreateWithoutEventsInput
+  connect: OrganizerWhereUniqueInput
+}
+
+input OrganizerCreateWithoutEventsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+}
+
+type OrganizerEdge {
+  node: Organizer!
+  cursor: String!
+}
+
+enum OrganizerOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+}
+
+type OrganizerPreviousValues {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+}
+
+type OrganizerSubscriptionPayload {
+  mutation: MutationType!
+  node: Organizer
+  updatedFields: [String!]
+  previousValues: OrganizerPreviousValues
+}
+
+input OrganizerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: OrganizerWhereInput
+  AND: [OrganizerSubscriptionWhereInput!]
+  OR: [OrganizerSubscriptionWhereInput!]
+  NOT: [OrganizerSubscriptionWhereInput!]
+}
+
+input OrganizerUpdateInput {
+  name: String
+  email: String
+  password: String
+  events: EventUpdateManyWithoutPostedByInput
+}
+
+input OrganizerUpdateManyMutationInput {
+  name: String
+  email: String
+  password: String
+}
+
+input OrganizerUpdateOneWithoutEventsInput {
+  create: OrganizerCreateWithoutEventsInput
+  update: OrganizerUpdateWithoutEventsDataInput
+  upsert: OrganizerUpsertWithoutEventsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: OrganizerWhereUniqueInput
+}
+
+input OrganizerUpdateWithoutEventsDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input OrganizerUpsertWithoutEventsInput {
+  update: OrganizerUpdateWithoutEventsDataInput!
+  create: OrganizerCreateWithoutEventsInput!
+}
+
+input OrganizerWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  events_every: EventWhereInput
+  events_some: EventWhereInput
+  events_none: EventWhereInput
+  AND: [OrganizerWhereInput!]
+  OR: [OrganizerWhereInput!]
+  NOT: [OrganizerWhereInput!]
+}
+
+input OrganizerWhereUniqueInput {
+  id: ID
+  email: String
+}
+
 type PageInfo {
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
@@ -42,6 +480,12 @@ type PageInfo {
 }
 
 type Query {
+  event(where: EventWhereUniqueInput!): Event
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
+  organizer(where: OrganizerWhereUniqueInput!): Organizer
+  organizers(where: OrganizerWhereInput, orderBy: OrganizerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Organizer]!
+  organizersConnection(where: OrganizerWhereInput, orderBy: OrganizerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrganizerConnection!
   question(where: QuestionWhereUniqueInput!): Question
   questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
   questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
@@ -173,6 +617,8 @@ input QuestionWhereUniqueInput {
 }
 
 type Subscription {
+  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
+  organizer(where: OrganizerSubscriptionWhereInput): OrganizerSubscriptionPayload
   question(where: QuestionSubscriptionWhereInput): QuestionSubscriptionPayload
 }
 `

@@ -4,3 +4,19 @@ type Question {
   description: String!
   votes: Int!
 }
+
+type Event {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  name: String!
+  code: String! @unique
+  postedBy: Organizer
+}
+
+type Organizer {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  events: [Event!]!
+}

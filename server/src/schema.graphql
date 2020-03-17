@@ -4,11 +4,32 @@ type Query {
 }
 
 type Mutation {
-  ask(description: String!): Question!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  post(name: String!, code: String!): Event!
 }
 
 type Question {
   id: ID!
   description: String!
   votes: Int!
+}
+
+type AuthPayload {
+  token: String
+  organizer: Organizer
+}
+
+type Event {
+  id: ID!
+  name: String!
+  code: String!
+  postedBy: Organizer
+}
+
+type Organizer {
+  id: ID!
+  name: String!
+  email: String!
+  events: [Event!]!
 }
