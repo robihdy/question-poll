@@ -1,8 +1,10 @@
 type Question {
   id: ID! @id
   createdAt: DateTime! @createdAt
+  username: String!
   description: String!
   votes: Int!
+  onEvent: Event
 }
 
 type Event {
@@ -11,6 +13,7 @@ type Event {
   name: String!
   code: String! @unique
   postedBy: Organizer
+  questions: [Question!]!
 }
 
 type Organizer {

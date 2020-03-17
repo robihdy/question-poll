@@ -41,8 +41,31 @@ const post = (parent, args, context, info) => {
   });
 };
 
+const ask = (parent, args, context) => {
+  return context.prisma.createQuestion({
+    username: args.username,
+    description: args.description,
+    votes: 0,
+    onEvent: { connect: { code: args.code } }
+  });
+};
+
+const vote = async (parent, args, context) => {
+  const { votes } = await context.prisma.question({ id: args.questionId });
+  return context.prisma.updateQuestion({
+    data: {
+      votes: votes + 1
+    },
+    where: {
+      id: args.questionId
+    }
+  });
+};
+
 module.exports = {
   signup,
   login,
-  post
+  post,
+  ask,
+  vote
 };

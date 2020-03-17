@@ -189,6 +189,18 @@ export type EventOrderByInput =
   | "code_ASC"
   | "code_DESC";
 
+export type QuestionOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "username_ASC"
+  | "username_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "votes_ASC"
+  | "votes_DESC";
+
 export type OrganizerOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -199,22 +211,11 @@ export type OrganizerOrderByInput =
   | "password_ASC"
   | "password_DESC";
 
-export type QuestionOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "votes_ASC"
-  | "votes_DESC";
-
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface EventUpdateInput {
-  name?: Maybe<String>;
-  code?: Maybe<String>;
-  postedBy?: Maybe<OrganizerUpdateOneWithoutEventsInput>;
+export interface QuestionUpdateWithWhereUniqueWithoutOnEventInput {
+  where: QuestionWhereUniqueInput;
+  data: QuestionUpdateWithoutOnEventDataInput;
 }
 
 export type EventWhereUniqueInput = AtLeastOne<{
@@ -222,9 +223,68 @@ export type EventWhereUniqueInput = AtLeastOne<{
   code?: Maybe<String>;
 }>;
 
-export interface OrganizerUpsertWithoutEventsInput {
-  update: OrganizerUpdateWithoutEventsDataInput;
-  create: OrganizerCreateWithoutEventsInput;
+export interface QuestionScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  username?: Maybe<String>;
+  username_not?: Maybe<String>;
+  username_in?: Maybe<String[] | String>;
+  username_not_in?: Maybe<String[] | String>;
+  username_lt?: Maybe<String>;
+  username_lte?: Maybe<String>;
+  username_gt?: Maybe<String>;
+  username_gte?: Maybe<String>;
+  username_contains?: Maybe<String>;
+  username_not_contains?: Maybe<String>;
+  username_starts_with?: Maybe<String>;
+  username_not_starts_with?: Maybe<String>;
+  username_ends_with?: Maybe<String>;
+  username_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  votes?: Maybe<Int>;
+  votes_not?: Maybe<Int>;
+  votes_in?: Maybe<Int[] | Int>;
+  votes_not_in?: Maybe<Int[] | Int>;
+  votes_lt?: Maybe<Int>;
+  votes_lte?: Maybe<Int>;
+  votes_gt?: Maybe<Int>;
+  votes_gte?: Maybe<Int>;
+  AND?: Maybe<QuestionScalarWhereInput[] | QuestionScalarWhereInput>;
+  OR?: Maybe<QuestionScalarWhereInput[] | QuestionScalarWhereInput>;
+  NOT?: Maybe<QuestionScalarWhereInput[] | QuestionScalarWhereInput>;
 }
 
 export interface EventWhereInput {
@@ -279,55 +339,89 @@ export interface EventWhereInput {
   code_ends_with?: Maybe<String>;
   code_not_ends_with?: Maybe<String>;
   postedBy?: Maybe<OrganizerWhereInput>;
+  questions_every?: Maybe<QuestionWhereInput>;
+  questions_some?: Maybe<QuestionWhereInput>;
+  questions_none?: Maybe<QuestionWhereInput>;
   AND?: Maybe<EventWhereInput[] | EventWhereInput>;
   OR?: Maybe<EventWhereInput[] | EventWhereInput>;
   NOT?: Maybe<EventWhereInput[] | EventWhereInput>;
 }
 
-export interface EventUpsertWithWhereUniqueWithoutPostedByInput {
-  where: EventWhereUniqueInput;
-  update: EventUpdateWithoutPostedByDataInput;
-  create: EventCreateWithoutPostedByInput;
+export interface QuestionUpdateManyWithWhereNestedInput {
+  where: QuestionScalarWhereInput;
+  data: QuestionUpdateManyDataInput;
 }
 
-export interface OrganizerCreateInput {
+export interface QuestionWhereInput {
   id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-  events?: Maybe<EventCreateManyWithoutPostedByInput>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  username?: Maybe<String>;
+  username_not?: Maybe<String>;
+  username_in?: Maybe<String[] | String>;
+  username_not_in?: Maybe<String[] | String>;
+  username_lt?: Maybe<String>;
+  username_lte?: Maybe<String>;
+  username_gt?: Maybe<String>;
+  username_gte?: Maybe<String>;
+  username_contains?: Maybe<String>;
+  username_not_contains?: Maybe<String>;
+  username_starts_with?: Maybe<String>;
+  username_not_starts_with?: Maybe<String>;
+  username_ends_with?: Maybe<String>;
+  username_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  votes?: Maybe<Int>;
+  votes_not?: Maybe<Int>;
+  votes_in?: Maybe<Int[] | Int>;
+  votes_not_in?: Maybe<Int[] | Int>;
+  votes_lt?: Maybe<Int>;
+  votes_lte?: Maybe<Int>;
+  votes_gt?: Maybe<Int>;
+  votes_gte?: Maybe<Int>;
+  onEvent?: Maybe<EventWhereInput>;
+  AND?: Maybe<QuestionWhereInput[] | QuestionWhereInput>;
+  OR?: Maybe<QuestionWhereInput[] | QuestionWhereInput>;
+  NOT?: Maybe<QuestionWhereInput[] | QuestionWhereInput>;
 }
 
-export interface EventUpdateWithoutPostedByDataInput {
-  name?: Maybe<String>;
-  code?: Maybe<String>;
-}
-
-export interface EventUpdateManyMutationInput {
-  name?: Maybe<String>;
-  code?: Maybe<String>;
-}
-
-export interface EventUpdateWithWhereUniqueWithoutPostedByInput {
-  where: EventWhereUniqueInput;
-  data: EventUpdateWithoutPostedByDataInput;
-}
-
-export interface OrganizerSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<OrganizerWhereInput>;
-  AND?: Maybe<
-    OrganizerSubscriptionWhereInput[] | OrganizerSubscriptionWhereInput
+export interface QuestionCreateManyWithoutOnEventInput {
+  create?: Maybe<
+    QuestionCreateWithoutOnEventInput[] | QuestionCreateWithoutOnEventInput
   >;
-  OR?: Maybe<
-    OrganizerSubscriptionWhereInput[] | OrganizerSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    OrganizerSubscriptionWhereInput[] | OrganizerSubscriptionWhereInput
-  >;
+  connect?: Maybe<QuestionWhereUniqueInput[] | QuestionWhereUniqueInput>;
 }
 
 export interface EventUpdateManyWithoutPostedByInput {
@@ -352,127 +446,41 @@ export interface EventUpdateManyWithoutPostedByInput {
   >;
 }
 
-export interface QuestionUpdateManyMutationInput {
+export interface QuestionCreateWithoutOnEventInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+  description: String;
+  votes: Int;
+}
+
+export interface QuestionUpdateManyDataInput {
+  username?: Maybe<String>;
   description?: Maybe<String>;
   votes?: Maybe<Int>;
 }
 
-export type OrganizerWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface OrganizerUpdateManyMutationInput {
+export interface EventUpdateInput {
   name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-}
-
-export interface EventCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  code: String;
-  postedBy?: Maybe<OrganizerCreateOneWithoutEventsInput>;
-}
-
-export interface EventUpdateManyWithWhereNestedInput {
-  where: EventScalarWhereInput;
-  data: EventUpdateManyDataInput;
-}
-
-export interface OrganizerCreateOneWithoutEventsInput {
-  create?: Maybe<OrganizerCreateWithoutEventsInput>;
-  connect?: Maybe<OrganizerWhereUniqueInput>;
-}
-
-export interface EventScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
   code?: Maybe<String>;
-  code_not?: Maybe<String>;
-  code_in?: Maybe<String[] | String>;
-  code_not_in?: Maybe<String[] | String>;
-  code_lt?: Maybe<String>;
-  code_lte?: Maybe<String>;
-  code_gt?: Maybe<String>;
-  code_gte?: Maybe<String>;
-  code_contains?: Maybe<String>;
-  code_not_contains?: Maybe<String>;
-  code_starts_with?: Maybe<String>;
-  code_not_starts_with?: Maybe<String>;
-  code_ends_with?: Maybe<String>;
-  code_not_ends_with?: Maybe<String>;
-  AND?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
-  OR?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
-  NOT?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
+  postedBy?: Maybe<OrganizerUpdateOneWithoutEventsInput>;
+  questions?: Maybe<QuestionUpdateManyWithoutOnEventInput>;
 }
 
-export interface OrganizerCreateWithoutEventsInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-}
-
-export interface QuestionSubscriptionWhereInput {
+export interface OrganizerSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<QuestionWhereInput>;
+  node?: Maybe<OrganizerWhereInput>;
   AND?: Maybe<
-    QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
+    OrganizerSubscriptionWhereInput[] | OrganizerSubscriptionWhereInput
   >;
-  OR?: Maybe<QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput>;
+  OR?: Maybe<
+    OrganizerSubscriptionWhereInput[] | OrganizerSubscriptionWhereInput
+  >;
   NOT?: Maybe<
-    QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
+    OrganizerSubscriptionWhereInput[] | OrganizerSubscriptionWhereInput
   >;
-}
-
-export interface OrganizerUpdateInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  events?: Maybe<EventUpdateManyWithoutPostedByInput>;
-}
-
-export interface QuestionUpdateInput {
-  description?: Maybe<String>;
-  votes?: Maybe<Int>;
 }
 
 export interface OrganizerUpdateOneWithoutEventsInput {
@@ -484,22 +492,98 @@ export interface OrganizerUpdateOneWithoutEventsInput {
   connect?: Maybe<OrganizerWhereUniqueInput>;
 }
 
-export interface EventUpdateManyDataInput {
+export interface QuestionUpdateManyMutationInput {
+  username?: Maybe<String>;
+  description?: Maybe<String>;
+  votes?: Maybe<Int>;
+}
+
+export interface OrganizerUpdateWithoutEventsDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export interface EventUpdateWithoutQuestionsDataInput {
   name?: Maybe<String>;
   code?: Maybe<String>;
+  postedBy?: Maybe<OrganizerUpdateOneWithoutEventsInput>;
 }
 
-export interface EventCreateManyWithoutPostedByInput {
+export interface OrganizerUpsertWithoutEventsInput {
+  update: OrganizerUpdateWithoutEventsDataInput;
+  create: OrganizerCreateWithoutEventsInput;
+}
+
+export interface EventUpdateOneWithoutQuestionsInput {
+  create?: Maybe<EventCreateWithoutQuestionsInput>;
+  update?: Maybe<EventUpdateWithoutQuestionsDataInput>;
+  upsert?: Maybe<EventUpsertWithoutQuestionsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<EventWhereUniqueInput>;
+}
+
+export interface QuestionUpdateManyWithoutOnEventInput {
   create?: Maybe<
-    EventCreateWithoutPostedByInput[] | EventCreateWithoutPostedByInput
+    QuestionCreateWithoutOnEventInput[] | QuestionCreateWithoutOnEventInput
   >;
-  connect?: Maybe<EventWhereUniqueInput[] | EventWhereUniqueInput>;
+  delete?: Maybe<QuestionWhereUniqueInput[] | QuestionWhereUniqueInput>;
+  connect?: Maybe<QuestionWhereUniqueInput[] | QuestionWhereUniqueInput>;
+  set?: Maybe<QuestionWhereUniqueInput[] | QuestionWhereUniqueInput>;
+  disconnect?: Maybe<QuestionWhereUniqueInput[] | QuestionWhereUniqueInput>;
+  update?: Maybe<
+    | QuestionUpdateWithWhereUniqueWithoutOnEventInput[]
+    | QuestionUpdateWithWhereUniqueWithoutOnEventInput
+  >;
+  upsert?: Maybe<
+    | QuestionUpsertWithWhereUniqueWithoutOnEventInput[]
+    | QuestionUpsertWithWhereUniqueWithoutOnEventInput
+  >;
+  deleteMany?: Maybe<QuestionScalarWhereInput[] | QuestionScalarWhereInput>;
+  updateMany?: Maybe<
+    | QuestionUpdateManyWithWhereNestedInput[]
+    | QuestionUpdateManyWithWhereNestedInput
+  >;
 }
 
-export interface EventCreateWithoutPostedByInput {
+export interface EventCreateWithoutQuestionsInput {
   id?: Maybe<ID_Input>;
   name: String;
   code: String;
+  postedBy?: Maybe<OrganizerCreateOneWithoutEventsInput>;
+}
+
+export interface EventUpdateManyWithWhereNestedInput {
+  where: EventScalarWhereInput;
+  data: EventUpdateManyDataInput;
+}
+
+export type QuestionWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface QuestionUpdateWithoutOnEventDataInput {
+  username?: Maybe<String>;
+  description?: Maybe<String>;
+  votes?: Maybe<Int>;
+}
+
+export interface OrganizerUpdateManyMutationInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export interface QuestionUpsertWithWhereUniqueWithoutOnEventInput {
+  where: QuestionWhereUniqueInput;
+  update: QuestionUpdateWithoutOnEventDataInput;
+  create: QuestionCreateWithoutOnEventInput;
+}
+
+export interface OrganizerCreateOneWithoutEventsInput {
+  create?: Maybe<OrganizerCreateWithoutEventsInput>;
+  connect?: Maybe<OrganizerWhereUniqueInput>;
 }
 
 export interface OrganizerWhereInput {
@@ -567,34 +651,22 @@ export interface OrganizerWhereInput {
   NOT?: Maybe<OrganizerWhereInput[] | OrganizerWhereInput>;
 }
 
-export interface OrganizerUpdateWithoutEventsDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-}
-
-export type QuestionWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface QuestionCreateInput {
-  id?: Maybe<ID_Input>;
-  description: String;
-  votes: Int;
-}
-
-export interface EventSubscriptionWhereInput {
+export interface QuestionSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<EventWhereInput>;
-  AND?: Maybe<EventSubscriptionWhereInput[] | EventSubscriptionWhereInput>;
-  OR?: Maybe<EventSubscriptionWhereInput[] | EventSubscriptionWhereInput>;
-  NOT?: Maybe<EventSubscriptionWhereInput[] | EventSubscriptionWhereInput>;
+  node?: Maybe<QuestionWhereInput>;
+  AND?: Maybe<
+    QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
+  >;
+  OR?: Maybe<QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput>;
+  NOT?: Maybe<
+    QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
+  >;
 }
 
-export interface QuestionWhereInput {
+export interface EventScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -617,31 +689,149 @@ export interface QuestionWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  code?: Maybe<String>;
+  code_not?: Maybe<String>;
+  code_in?: Maybe<String[] | String>;
+  code_not_in?: Maybe<String[] | String>;
+  code_lt?: Maybe<String>;
+  code_lte?: Maybe<String>;
+  code_gt?: Maybe<String>;
+  code_gte?: Maybe<String>;
+  code_contains?: Maybe<String>;
+  code_not_contains?: Maybe<String>;
+  code_starts_with?: Maybe<String>;
+  code_not_starts_with?: Maybe<String>;
+  code_ends_with?: Maybe<String>;
+  code_not_ends_with?: Maybe<String>;
+  AND?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
+  OR?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
+  NOT?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
+}
+
+export interface EventUpsertWithoutQuestionsInput {
+  update: EventUpdateWithoutQuestionsDataInput;
+  create: EventCreateWithoutQuestionsInput;
+}
+
+export interface EventUpsertWithWhereUniqueWithoutPostedByInput {
+  where: EventWhereUniqueInput;
+  update: EventUpdateWithoutPostedByDataInput;
+  create: EventCreateWithoutPostedByInput;
+}
+
+export interface QuestionUpdateInput {
+  username?: Maybe<String>;
   description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
   votes?: Maybe<Int>;
-  votes_not?: Maybe<Int>;
-  votes_in?: Maybe<Int[] | Int>;
-  votes_not_in?: Maybe<Int[] | Int>;
-  votes_lt?: Maybe<Int>;
-  votes_lte?: Maybe<Int>;
-  votes_gt?: Maybe<Int>;
-  votes_gte?: Maybe<Int>;
-  AND?: Maybe<QuestionWhereInput[] | QuestionWhereInput>;
-  OR?: Maybe<QuestionWhereInput[] | QuestionWhereInput>;
-  NOT?: Maybe<QuestionWhereInput[] | QuestionWhereInput>;
+  onEvent?: Maybe<EventUpdateOneWithoutQuestionsInput>;
+}
+
+export interface EventUpdateManyMutationInput {
+  name?: Maybe<String>;
+  code?: Maybe<String>;
+}
+
+export interface QuestionCreateInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+  description: String;
+  votes: Int;
+  onEvent?: Maybe<EventCreateOneWithoutQuestionsInput>;
+}
+
+export interface EventUpdateWithoutPostedByDataInput {
+  name?: Maybe<String>;
+  code?: Maybe<String>;
+  questions?: Maybe<QuestionUpdateManyWithoutOnEventInput>;
+}
+
+export interface EventCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  code: String;
+  postedBy?: Maybe<OrganizerCreateOneWithoutEventsInput>;
+  questions?: Maybe<QuestionCreateManyWithoutOnEventInput>;
+}
+
+export interface EventUpdateWithWhereUniqueWithoutPostedByInput {
+  where: EventWhereUniqueInput;
+  data: EventUpdateWithoutPostedByDataInput;
+}
+
+export interface EventSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<EventWhereInput>;
+  AND?: Maybe<EventSubscriptionWhereInput[] | EventSubscriptionWhereInput>;
+  OR?: Maybe<EventSubscriptionWhereInput[] | EventSubscriptionWhereInput>;
+  NOT?: Maybe<EventSubscriptionWhereInput[] | EventSubscriptionWhereInput>;
+}
+
+export interface OrganizerUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  events?: Maybe<EventUpdateManyWithoutPostedByInput>;
+}
+
+export interface EventCreateWithoutPostedByInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  code: String;
+  questions?: Maybe<QuestionCreateManyWithoutOnEventInput>;
+}
+
+export interface EventCreateManyWithoutPostedByInput {
+  create?: Maybe<
+    EventCreateWithoutPostedByInput[] | EventCreateWithoutPostedByInput
+  >;
+  connect?: Maybe<EventWhereUniqueInput[] | EventWhereUniqueInput>;
+}
+
+export interface OrganizerCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  events?: Maybe<EventCreateManyWithoutPostedByInput>;
+}
+
+export type OrganizerWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface OrganizerCreateWithoutEventsInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+}
+
+export interface EventUpdateManyDataInput {
+  name?: Maybe<String>;
+  code?: Maybe<String>;
+}
+
+export interface EventCreateOneWithoutQuestionsInput {
+  create?: Maybe<EventCreateWithoutQuestionsInput>;
+  connect?: Maybe<EventWhereUniqueInput>;
 }
 
 export interface NodeNode {
@@ -651,6 +841,7 @@ export interface NodeNode {
 export interface QuestionPreviousValues {
   id: ID_Output;
   createdAt: DateTimeOutput;
+  username: String;
   description: String;
   votes: Int;
 }
@@ -660,6 +851,7 @@ export interface QuestionPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
+  username: () => Promise<String>;
   description: () => Promise<String>;
   votes: () => Promise<Int>;
 }
@@ -669,71 +861,25 @@ export interface QuestionPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  username: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   votes: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface OrganizerEdge {
-  node: Organizer;
-  cursor: String;
+export interface AggregateEvent {
+  count: Int;
 }
 
-export interface OrganizerEdgePromise
-  extends Promise<OrganizerEdge>,
+export interface AggregateEventPromise
+  extends Promise<AggregateEvent>,
     Fragmentable {
-  node: <T = OrganizerPromise>() => T;
-  cursor: () => Promise<String>;
+  count: () => Promise<Int>;
 }
 
-export interface OrganizerEdgeSubscription
-  extends Promise<AsyncIterator<OrganizerEdge>>,
+export interface AggregateEventSubscription
+  extends Promise<AsyncIterator<AggregateEvent>>,
     Fragmentable {
-  node: <T = OrganizerSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface OrganizerConnection {
-  pageInfo: PageInfo;
-  edges: OrganizerEdge[];
-}
-
-export interface OrganizerConnectionPromise
-  extends Promise<OrganizerConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<OrganizerEdge>>() => T;
-  aggregate: <T = AggregateOrganizerPromise>() => T;
-}
-
-export interface OrganizerConnectionSubscription
-  extends Promise<AsyncIterator<OrganizerConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<OrganizerEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateOrganizerSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Organizer {
@@ -795,20 +941,66 @@ export interface OrganizerNullablePromise
   }) => T;
 }
 
-export interface BatchPayload {
-  count: Long;
+export interface Event {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  name: String;
+  code: String;
 }
 
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
+export interface EventPromise extends Promise<Event>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  code: () => Promise<String>;
+  postedBy: <T = OrganizerPromise>() => T;
+  questions: <T = FragmentableArray<Question>>(args?: {
+    where?: QuestionWhereInput;
+    orderBy?: QuestionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
+export interface EventSubscription
+  extends Promise<AsyncIterator<Event>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  code: () => Promise<AsyncIterator<String>>;
+  postedBy: <T = OrganizerSubscription>() => T;
+  questions: <T = Promise<AsyncIterator<QuestionSubscription>>>(args?: {
+    where?: QuestionWhereInput;
+    orderBy?: QuestionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface EventNullablePromise
+  extends Promise<Event | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  code: () => Promise<String>;
+  postedBy: <T = OrganizerPromise>() => T;
+  questions: <T = FragmentableArray<Question>>(args?: {
+    where?: QuestionWhereInput;
+    orderBy?: QuestionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface EventConnection {
@@ -832,39 +1024,20 @@ export interface EventConnectionSubscription
   aggregate: <T = AggregateEventSubscription>() => T;
 }
 
-export interface AggregateEvent {
-  count: Int;
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface AggregateEventPromise
-  extends Promise<AggregateEvent>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  count: () => Promise<Int>;
+  count: () => Promise<Long>;
 }
 
-export interface AggregateEventSubscription
-  extends Promise<AsyncIterator<AggregateEvent>>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface QuestionEdge {
-  node: Question;
-  cursor: String;
-}
-
-export interface QuestionEdgePromise
-  extends Promise<QuestionEdge>,
-    Fragmentable {
-  node: <T = QuestionPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface QuestionEdgeSubscription
-  extends Promise<AsyncIterator<QuestionEdge>>,
-    Fragmentable {
-  node: <T = QuestionSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface EventEdge {
@@ -884,55 +1057,124 @@ export interface EventEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface Event {
+export interface Question {
   id: ID_Output;
   createdAt: DateTimeOutput;
-  name: String;
-  code: String;
+  username: String;
+  description: String;
+  votes: Int;
 }
 
-export interface EventPromise extends Promise<Event>, Fragmentable {
+export interface QuestionPromise extends Promise<Question>, Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-  code: () => Promise<String>;
-  postedBy: <T = OrganizerPromise>() => T;
+  username: () => Promise<String>;
+  description: () => Promise<String>;
+  votes: () => Promise<Int>;
+  onEvent: <T = EventPromise>() => T;
 }
 
-export interface EventSubscription
-  extends Promise<AsyncIterator<Event>>,
+export interface QuestionSubscription
+  extends Promise<AsyncIterator<Question>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-  code: () => Promise<AsyncIterator<String>>;
-  postedBy: <T = OrganizerSubscription>() => T;
+  username: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  votes: () => Promise<AsyncIterator<Int>>;
+  onEvent: <T = EventSubscription>() => T;
 }
 
-export interface EventNullablePromise
-  extends Promise<Event | null>,
+export interface QuestionNullablePromise
+  extends Promise<Question | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-  code: () => Promise<String>;
-  postedBy: <T = OrganizerPromise>() => T;
+  username: () => Promise<String>;
+  description: () => Promise<String>;
+  votes: () => Promise<Int>;
+  onEvent: <T = EventPromise>() => T;
 }
 
-export interface AggregateOrganizer {
+export interface AggregateQuestion {
   count: Int;
 }
 
-export interface AggregateOrganizerPromise
-  extends Promise<AggregateOrganizer>,
+export interface AggregateQuestionPromise
+  extends Promise<AggregateQuestion>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateOrganizerSubscription
-  extends Promise<AsyncIterator<AggregateOrganizer>>,
+export interface AggregateQuestionSubscription
+  extends Promise<AsyncIterator<AggregateQuestion>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface OrganizerPreviousValues {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password: String;
+}
+
+export interface OrganizerPreviousValuesPromise
+  extends Promise<OrganizerPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+}
+
+export interface OrganizerPreviousValuesSubscription
+  extends Promise<AsyncIterator<OrganizerPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+}
+
+export interface QuestionConnection {
+  pageInfo: PageInfo;
+  edges: QuestionEdge[];
+}
+
+export interface QuestionConnectionPromise
+  extends Promise<QuestionConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<QuestionEdge>>() => T;
+  aggregate: <T = AggregateQuestionPromise>() => T;
+}
+
+export interface QuestionConnectionSubscription
+  extends Promise<AsyncIterator<QuestionConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<QuestionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateQuestionSubscription>() => T;
+}
+
+export interface OrganizerEdge {
+  node: Organizer;
+  cursor: String;
+}
+
+export interface OrganizerEdgePromise
+  extends Promise<OrganizerEdge>,
+    Fragmentable {
+  node: <T = OrganizerPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface OrganizerEdgeSubscription
+  extends Promise<AsyncIterator<OrganizerEdge>>,
+    Fragmentable {
+  node: <T = OrganizerSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface EventPreviousValues {
@@ -1010,29 +1252,83 @@ export interface OrganizerSubscriptionPayloadSubscription
   previousValues: <T = OrganizerPreviousValuesSubscription>() => T;
 }
 
-export interface OrganizerPreviousValues {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password: String;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface OrganizerPreviousValuesPromise
-  extends Promise<OrganizerPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
 }
 
-export interface OrganizerPreviousValuesSubscription
-  extends Promise<AsyncIterator<OrganizerPreviousValues>>,
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface OrganizerConnection {
+  pageInfo: PageInfo;
+  edges: OrganizerEdge[];
+}
+
+export interface OrganizerConnectionPromise
+  extends Promise<OrganizerConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<OrganizerEdge>>() => T;
+  aggregate: <T = AggregateOrganizerPromise>() => T;
+}
+
+export interface OrganizerConnectionSubscription
+  extends Promise<AsyncIterator<OrganizerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<OrganizerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateOrganizerSubscription>() => T;
+}
+
+export interface AggregateOrganizer {
+  count: Int;
+}
+
+export interface AggregateOrganizerPromise
+  extends Promise<AggregateOrganizer>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateOrganizerSubscription
+  extends Promise<AsyncIterator<AggregateOrganizer>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface QuestionEdge {
+  node: Question;
+  cursor: String;
+}
+
+export interface QuestionEdgePromise
+  extends Promise<QuestionEdge>,
+    Fragmentable {
+  node: <T = QuestionPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface QuestionEdgeSubscription
+  extends Promise<AsyncIterator<QuestionEdge>>,
+    Fragmentable {
+  node: <T = QuestionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface QuestionSubscriptionPayload {
@@ -1060,74 +1356,7 @@ export interface QuestionSubscriptionPayloadSubscription
   previousValues: <T = QuestionPreviousValuesSubscription>() => T;
 }
 
-export interface Question {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  description: String;
-  votes: Int;
-}
-
-export interface QuestionPromise extends Promise<Question>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  description: () => Promise<String>;
-  votes: () => Promise<Int>;
-}
-
-export interface QuestionSubscription
-  extends Promise<AsyncIterator<Question>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  description: () => Promise<AsyncIterator<String>>;
-  votes: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface QuestionNullablePromise
-  extends Promise<Question | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  description: () => Promise<String>;
-  votes: () => Promise<Int>;
-}
-
-export interface QuestionConnection {
-  pageInfo: PageInfo;
-  edges: QuestionEdge[];
-}
-
-export interface QuestionConnectionPromise
-  extends Promise<QuestionConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<QuestionEdge>>() => T;
-  aggregate: <T = AggregateQuestionPromise>() => T;
-}
-
-export interface QuestionConnectionSubscription
-  extends Promise<AsyncIterator<QuestionConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<QuestionEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateQuestionSubscription>() => T;
-}
-
-export interface AggregateQuestion {
-  count: Int;
-}
-
-export interface AggregateQuestionPromise
-  extends Promise<AggregateQuestion>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateQuestionSubscription
-  extends Promise<AsyncIterator<AggregateQuestion>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
+export type Long = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1139,18 +1368,16 @@ DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
 
-export type Long = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.

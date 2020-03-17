@@ -4,12 +4,16 @@ const Query = require('./resolvers/Query');
 const Mutation = require('./resolvers/Mutation');
 const Organizer = require('./resolvers/Organizer');
 const Event = require('./resolvers/Event');
+const Question = require('./resolvers/Question');
+const Subscription = require('./resolvers/Subscription');
 
 const resolvers = {
   Query,
   Mutation,
   Organizer,
-  Event
+  Event,
+  Question,
+  Subscription
 };
 
 const server = new GraphQLServer({

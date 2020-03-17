@@ -27,6 +27,7 @@ type Event {
   name: String!
   code: String!
   postedBy: Organizer
+  questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question!]
 }
 
 type EventConnection {
@@ -40,6 +41,7 @@ input EventCreateInput {
   name: String!
   code: String!
   postedBy: OrganizerCreateOneWithoutEventsInput
+  questions: QuestionCreateManyWithoutOnEventInput
 }
 
 input EventCreateManyWithoutPostedByInput {
@@ -47,10 +49,23 @@ input EventCreateManyWithoutPostedByInput {
   connect: [EventWhereUniqueInput!]
 }
 
+input EventCreateOneWithoutQuestionsInput {
+  create: EventCreateWithoutQuestionsInput
+  connect: EventWhereUniqueInput
+}
+
 input EventCreateWithoutPostedByInput {
   id: ID
   name: String!
   code: String!
+  questions: QuestionCreateManyWithoutOnEventInput
+}
+
+input EventCreateWithoutQuestionsInput {
+  id: ID
+  name: String!
+  code: String!
+  postedBy: OrganizerCreateOneWithoutEventsInput
 }
 
 type EventEdge {
@@ -154,6 +169,7 @@ input EventUpdateInput {
   name: String
   code: String
   postedBy: OrganizerUpdateOneWithoutEventsInput
+  questions: QuestionUpdateManyWithoutOnEventInput
 }
 
 input EventUpdateManyDataInput {
@@ -183,14 +199,35 @@ input EventUpdateManyWithWhereNestedInput {
   data: EventUpdateManyDataInput!
 }
 
+input EventUpdateOneWithoutQuestionsInput {
+  create: EventCreateWithoutQuestionsInput
+  update: EventUpdateWithoutQuestionsDataInput
+  upsert: EventUpsertWithoutQuestionsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: EventWhereUniqueInput
+}
+
 input EventUpdateWithoutPostedByDataInput {
   name: String
   code: String
+  questions: QuestionUpdateManyWithoutOnEventInput
+}
+
+input EventUpdateWithoutQuestionsDataInput {
+  name: String
+  code: String
+  postedBy: OrganizerUpdateOneWithoutEventsInput
 }
 
 input EventUpdateWithWhereUniqueWithoutPostedByInput {
   where: EventWhereUniqueInput!
   data: EventUpdateWithoutPostedByDataInput!
+}
+
+input EventUpsertWithoutQuestionsInput {
+  update: EventUpdateWithoutQuestionsDataInput!
+  create: EventCreateWithoutQuestionsInput!
 }
 
 input EventUpsertWithWhereUniqueWithoutPostedByInput {
@@ -251,6 +288,9 @@ input EventWhereInput {
   code_ends_with: String
   code_not_ends_with: String
   postedBy: OrganizerWhereInput
+  questions_every: QuestionWhereInput
+  questions_some: QuestionWhereInput
+  questions_none: QuestionWhereInput
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]
   NOT: [EventWhereInput!]
@@ -495,8 +535,10 @@ type Query {
 type Question {
   id: ID!
   createdAt: DateTime!
+  username: String!
   description: String!
   votes: Int!
+  onEvent: Event
 }
 
 type QuestionConnection {
@@ -507,6 +549,20 @@ type QuestionConnection {
 
 input QuestionCreateInput {
   id: ID
+  username: String!
+  description: String!
+  votes: Int!
+  onEvent: EventCreateOneWithoutQuestionsInput
+}
+
+input QuestionCreateManyWithoutOnEventInput {
+  create: [QuestionCreateWithoutOnEventInput!]
+  connect: [QuestionWhereUniqueInput!]
+}
+
+input QuestionCreateWithoutOnEventInput {
+  id: ID
+  username: String!
   description: String!
   votes: Int!
 }
@@ -521,6 +577,8 @@ enum QuestionOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  username_ASC
+  username_DESC
   description_ASC
   description_DESC
   votes_ASC
@@ -530,8 +588,73 @@ enum QuestionOrderByInput {
 type QuestionPreviousValues {
   id: ID!
   createdAt: DateTime!
+  username: String!
   description: String!
   votes: Int!
+}
+
+input QuestionScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  votes: Int
+  votes_not: Int
+  votes_in: [Int!]
+  votes_not_in: [Int!]
+  votes_lt: Int
+  votes_lte: Int
+  votes_gt: Int
+  votes_gte: Int
+  AND: [QuestionScalarWhereInput!]
+  OR: [QuestionScalarWhereInput!]
+  NOT: [QuestionScalarWhereInput!]
 }
 
 type QuestionSubscriptionPayload {
@@ -553,13 +676,56 @@ input QuestionSubscriptionWhereInput {
 }
 
 input QuestionUpdateInput {
+  username: String
+  description: String
+  votes: Int
+  onEvent: EventUpdateOneWithoutQuestionsInput
+}
+
+input QuestionUpdateManyDataInput {
+  username: String
   description: String
   votes: Int
 }
 
 input QuestionUpdateManyMutationInput {
+  username: String
   description: String
   votes: Int
+}
+
+input QuestionUpdateManyWithoutOnEventInput {
+  create: [QuestionCreateWithoutOnEventInput!]
+  delete: [QuestionWhereUniqueInput!]
+  connect: [QuestionWhereUniqueInput!]
+  set: [QuestionWhereUniqueInput!]
+  disconnect: [QuestionWhereUniqueInput!]
+  update: [QuestionUpdateWithWhereUniqueWithoutOnEventInput!]
+  upsert: [QuestionUpsertWithWhereUniqueWithoutOnEventInput!]
+  deleteMany: [QuestionScalarWhereInput!]
+  updateMany: [QuestionUpdateManyWithWhereNestedInput!]
+}
+
+input QuestionUpdateManyWithWhereNestedInput {
+  where: QuestionScalarWhereInput!
+  data: QuestionUpdateManyDataInput!
+}
+
+input QuestionUpdateWithoutOnEventDataInput {
+  username: String
+  description: String
+  votes: Int
+}
+
+input QuestionUpdateWithWhereUniqueWithoutOnEventInput {
+  where: QuestionWhereUniqueInput!
+  data: QuestionUpdateWithoutOnEventDataInput!
+}
+
+input QuestionUpsertWithWhereUniqueWithoutOnEventInput {
+  where: QuestionWhereUniqueInput!
+  update: QuestionUpdateWithoutOnEventDataInput!
+  create: QuestionCreateWithoutOnEventInput!
 }
 
 input QuestionWhereInput {
@@ -585,6 +751,20 @@ input QuestionWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -607,6 +787,7 @@ input QuestionWhereInput {
   votes_lte: Int
   votes_gt: Int
   votes_gte: Int
+  onEvent: EventWhereInput
   AND: [QuestionWhereInput!]
   OR: [QuestionWhereInput!]
   NOT: [QuestionWhereInput!]
