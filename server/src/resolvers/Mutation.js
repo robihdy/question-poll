@@ -46,7 +46,7 @@ const ask = (parent, args, context) => {
     username: args.username,
     description: args.description,
     votes: 0,
-    onEvent: { connect: { code: args.code } }
+    onEvent: { connect: { id: args.eventId } }
   });
 };
 

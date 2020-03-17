@@ -1,5 +1,7 @@
-const getQuestions = (root, args, context, info) => {
-  return context.prisma.questions();
+const getQuestionsByEventId = (root, args, context, info) => {
+  return context.prisma
+    .event({ id: args.eventId })
+    .questions({ orderBy: args.orderBy });
 };
 
 const getEventByCode = (parent, args, context) => {
@@ -7,6 +9,6 @@ const getEventByCode = (parent, args, context) => {
 };
 
 module.exports = {
-  getQuestions,
+  getQuestionsByEventId,
   getEventByCode
 };

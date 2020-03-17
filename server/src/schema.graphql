@@ -1,6 +1,9 @@
 type Query {
   info: String!
-  getQuestions: [Question!]!
+  getQuestionsByEventId(
+    eventId: ID!
+    orderBy: QuestionOrderByInput
+  ): [Question!]!
   getEventByCode(code: String!): Event
 }
 
@@ -8,7 +11,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   post(name: String!, code: String!): Event!
-  ask(username: String!, description: String!, code: String!): Question!
+  ask(username: String!, description: String!, eventId: ID!): Question!
   vote(questionId: ID!): Question
 }
 
@@ -43,4 +46,11 @@ type Organizer {
 type AuthPayload {
   token: String
   organizer: Organizer
+}
+
+enum QuestionOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  votes_ASC
+  votes_DESC
 }
